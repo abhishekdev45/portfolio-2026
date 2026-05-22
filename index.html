@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abhishek Rajbhar — Software Engineer</title>
+  <meta name="description" content="Full Stack Engineer specialising in Node.js, MongoDB, and AI-powered systems. 2 years building scalable marketplace platforms and developer tools.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ─── Reset & Variables ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:     #0d1117;
+      --bg2:    #161b22;
+      --bg3:    #21262d;
+      --border: #30363d;
+      --text:   #e6edf3;
+      --muted:  #8b949e;
+      --accent: #58a6ff;
+      --green:  #3fb950;
+      --yellow: #d29922;
+      --purple: #bc8cff;
+      --red:    #f85149;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+    /* ─── Utility ───────────────────────────────────────── */
+    .mono   { font-family: 'JetBrains Mono', monospace; }
+    .accent { color: var(--accent); }
+    .green  { color: var(--green); }
+    .muted  { color: var(--muted); }
+    .divider { border: none; border-top: 1px solid var(--border); }
+
+    /* ─── Nav ───────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 13px 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(13,17,23,0.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--muted); }
+    .nav-brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 26px; }
+    .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; font-family: 'JetBrains Mono', monospace; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-status { display: flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--green); }
+    .dot-pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
+
+    /* ─── Section Wrappers ──────────────────────────────── */
+    .sec-outer { padding: 96px 0; }
+    .sec-inner { max-width: 1160px; margin: 0 auto; padding: 0 80px; }
+    .sec-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .sec-label span { color: var(--accent); }
+    .sec-title { font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+    .sec-sub   { color: var(--muted); font-size: 15px; margin-bottom: 52px; max-width: 520px; line-height: 1.65; }
+
+    /* ─── Animations ────────────────────────────────────── */
+    @keyframes pulse   { 0%,100%{opacity:1} 50%{opacity:.3} }
+    @keyframes fadeUp  { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes bounce  { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(5px)} }
+
+    .fade-1 { animation: fadeUp .6s .0s ease both; }
+    .fade-2 { animation: fadeUp .6s .1s ease both; }
+    .fade-3 { animation: fadeUp .6s .2s ease both; }
+    .fade-4 { animation: fadeUp .6s .3s ease both; }
+    .fade-5 { animation: fadeUp .6s .4s ease both; }
+    .fade-6 { animation: fadeUp .6s .5s ease both; }
+
+    /* ═══════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 400px; gap: 60px; align-items: center;
+      max-width: 1160px; margin: 0 auto;
+      padding: 120px 80px 80px;
+      position: relative;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(88,166,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(88,166,255,.03) 1px, transparent 1px);
+      background-size: 40px 40px; pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute; top: 18%; left: 30%;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(88,166,255,.07) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    /* sys label chip */
+    .sys-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--muted); border: 1px solid var(--border);
+      padding: 5px 14px; border-radius: 4px; margin-bottom: 28px;
+      background: var(--bg2);
+    }
+    .sys-chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s ease-in-out infinite; }
+
+    .hero-name {
+      font-size: clamp(44px, 5.5vw, 68px);
+      font-weight: 800; letter-spacing: -3px; line-height: 1.02;
+      margin-bottom: 18px;
+    }
+    .hero-headline {
+      font-size: 18px; color: var(--muted); font-weight: 400;
+      line-height: 1.7; max-width: 460px; margin-bottom: 32px;
+    }
+    .hero-headline strong { color: var(--text); font-weight: 500; }
+
+    .focus-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .ftag {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border);
+      color: var(--muted); background: var(--bg2);
+    }
+    .ftag.active { border-color: var(--accent); color: var(--accent); background: rgba(88,166,255,.08); }
+
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-p {
+      padding: 11px 22px; border-radius: 6px;
+      background: var(--accent); color: #0d1117;
+      font-size: 14px; font-weight: 600; border: none; cursor: pointer;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn-p:hover { opacity: .86; transform: translateY(-1px); }
+    .btn-s {
+      padding: 11px 22px; border-radius: 6px;
+      background: transparent; color: var(--text);
+      font-size: 14px; font-weight: 500; border: 1px solid var(--border); cursor: pointer;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      transition: border-color .2s, transform .15s;
+    }
+    .btn-s:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .btn-g {
+      padding: 11px 18px; border-radius: 6px;
+      background: transparent; color: var(--muted);
+      font-size: 13px; border: 1px solid transparent; cursor: pointer;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+      transition: color .2s; font-family: 'JetBrains Mono', monospace;
+    }
+    .btn-g:hover { color: var(--text); }
+
+    /* Status panel */
+    .status-panel { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; position: relative; z-index: 1; }
+    .sp-header { padding: 11px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; background: var(--bg3); }
+    .wdot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .sp-title { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); margin-left: 4px; }
+    .sp-body { padding: 18px; }
+    .mrow { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(48,54,61,.55); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+    .mrow:last-of-type { border-bottom: none; }
+    .ml { color: var(--muted); }
+    .mv { color: var(--text); } .mv.g { color: var(--green); } .mv.b { color: var(--accent); } .mv.y { color: var(--yellow); }
+    .bar-w { margin-top: 14px; }
+    .bar-l { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 5px; }
+    .bar-t { height: 3px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+    .bar-f { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent), #79c0ff); }
+    .act-feed { margin-top: 14px; }
+    .act-item { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 1px solid rgba(48,54,61,.4); font-size: 12px; }
+    .act-item:last-child { border-bottom: none; }
+    .adot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+    .atext { color: var(--muted); line-height: 1.45; font-family: 'JetBrains Mono', monospace; }
+    .atext strong { color: var(--text); }
+    .atime { color: rgba(139,148,158,.45); font-size: 10px; margin-top: 2px; }
+    .sp-footer { padding: 11px 18px; border-top: 1px solid var(--border); background: rgba(13,17,23,.4); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+    .sp-footer span { color: var(--green); }
+
+    .scroll-hint {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      animation: fadeUp .6s .9s ease both;
+    }
+    .scroll-arr { width: 16px; height: 16px; border-right: 1px solid var(--muted); border-bottom: 1px solid var(--muted); transform: rotate(45deg); animation: bounce 1.6s ease-in-out infinite; }
+
+    /* ═══════════════════════════════════════════════════════
+       JOURNEY / TIMELINE
+    ═══════════════════════════════════════════════════════ */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--border) 8%, var(--border) 92%, transparent);
+    }
+    .tl-item { position: relative; margin-bottom: 8px; }
+    .tl-dot { position: absolute; left: -38px; top: 17px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--bg); z-index: 1; }
+    .tl-hdr {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 15px 20px; cursor: pointer;
+      display: flex; align-items: center; gap: 16px;
+      transition: border-color .2s; user-select: none;
+    }
+    .tl-hdr:hover { border-color: rgba(88,166,255,.4); }
+    .tl-item.open .tl-hdr { border-color: var(--accent); border-radius: 10px 10px 0 0; border-bottom-color: var(--border); }
+    .tl-yr { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); white-space: nowrap; min-width: 56px; }
+    .tl-tw { flex: 1; }
+    .tl-title { font-size: 15px; font-weight: 600; color: var(--text); }
+    .tl-sub { font-size: 12px; color: var(--muted); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+    .tl-badge { font-size: 10px; font-family: 'JetBrains Mono', monospace; padding: 3px 8px; border-radius: 20px; border: 1px solid; white-space: nowrap; }
+    .tl-arrow { color: var(--muted); font-size: 12px; transition: transform .25s; flex-shrink: 0; }
+    .tl-item.open .tl-arrow { transform: rotate(90deg); }
+    .tl-body {
+      background: var(--bg2); border: 1px solid var(--accent); border-top: none;
+      border-radius: 0 0 10px 10px;
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease;
+      padding: 0 20px;
+    }
+    .tl-item.open .tl-body { max-height: 700px; padding: 20px; }
+    .dg { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+    .dc { background: var(--bg3); border-radius: 8px; padding: 14px; border: 1px solid var(--border); }
+    .dc h4 { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .dc p { font-size: 13px; color: var(--text); line-height: 1.6; }
+    .t-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .chip { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 3px 10px; border-radius: 4px; background: var(--bg3); border: 1px solid var(--border); color: var(--muted); }
+    .chip.hl { border-color: var(--accent); color: var(--accent); }
+    .lesson { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid rgba(48,54,61,.5); font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .lesson:last-child { border-bottom: none; }
+    .lesson-icon { color: var(--accent); font-family: monospace; flex-shrink: 0; margin-top: 1px; }
+
+    /* ═══════════════════════════════════════════════════════
+       SKILLS
+    ═══════════════════════════════════════════════════════ */
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .sk-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; transition: border-color .2s; }
+    .sk-card:hover { border-color: rgba(88,166,255,.3); }
+    .sk-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .sk-icon { font-size: 18px; }
+    .sk-label { font-size: 13px; font-weight: 600; color: var(--text); }
+    .sk-sub { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+    .sk-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sc { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 4px 10px; border-radius: 4px; background: var(--bg3); border: 1px solid var(--border); color: var(--muted); }
+    .sc.p { border-color: rgba(88,166,255,.4); color: var(--accent); background: rgba(88,166,255,.06); }
+    .sc.g { border-color: rgba(63,185,80,.4); color: var(--green); background: rgba(63,185,80,.06); }
+
+    /* ═══════════════════════════════════════════════════════
+       PROJECTS
+    ═══════════════════════════════════════════════════════ */
+    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .pcard {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px; display: flex; flex-direction: column; gap: 14px;
+      transition: border-color .2s, transform .2s;
+    }
+    .pcard:hover { border-color: rgba(88,166,255,.4); transform: translateY(-2px); }
+    .pcard.feat {
+      border-color: rgba(88,166,255,.35);
+      background: linear-gradient(135deg, var(--bg2), rgba(88,166,255,.04));
+    }
+    .p-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .p-icon { width: 40px; height: 40px; border-radius: 8px; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .p-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .p-link { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); text-decoration: none; padding: 4px 10px; border: 1px solid var(--border); border-radius: 4px; transition: color .2s, border-color .2s; white-space: nowrap; }
+    .p-link:hover { color: var(--accent); border-color: var(--accent); }
+    .p-name { font-size: 17px; font-weight: 700; color: var(--text); }
+    .p-date { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--muted); margin-top: 2px; }
+    .p-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+    .p-tech { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pt { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px; background: var(--bg3); border: 1px solid var(--border); color: var(--muted); }
+    .p-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--border); }
+    .p-stat { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+    .p-stat span { color: var(--accent); }
+    .feat-badge { font-size: 10px; font-family: 'JetBrains Mono', monospace; padding: 3px 8px; border-radius: 20px; border: 1px solid var(--green); color: var(--green); }
+
+    /* ═══════════════════════════════════════════════════════
+       EXPERIENCE
+    ═══════════════════════════════════════════════════════ */
+    .exp-list { display: flex; flex-direction: column; gap: 16px; }
+    .exp-card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 24px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: start;
+      transition: border-color .2s;
+    }
+    .exp-card:hover { border-color: rgba(88,166,255,.3); }
+    .exp-role { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .exp-co   { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); margin-bottom: 12px; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .exp-bullets li { font-size: 13px; color: var(--muted); padding-left: 16px; position: relative; line-height: 1.55; }
+    .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-family: monospace; }
+    .exp-meta { text-align: right; }
+    .exp-date { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); white-space: nowrap; }
+    .exp-badge { margin-top: 8px; display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 9px; border-radius: 20px; border: 1px solid var(--border); color: var(--muted); }
+
+    /* Product spotlight */
+    .product-spotlight {
+      margin: 14px 0 16px;
+      background: rgba(88,166,255,.05);
+      border: 1px solid rgba(88,166,255,.25);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 16px;
+    }
+    .ps-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+    .ps-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .ps-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 2px 8px; border-radius: 20px; border: 1px solid rgba(88,166,255,.4); color: var(--accent); background: rgba(88,166,255,.08); }
+    .ps-tag.g { border-color: rgba(63,185,80,.4); color: var(--green); background: rgba(63,185,80,.08); }
+    .ps-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+    .ps-stats { display: flex; gap: 20px; flex-wrap: wrap; }
+    .ps-stat { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+    .ps-stat span { color: var(--text); font-weight: 600; }
+
+    /* ═══════════════════════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════════════════════ */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .ctt-left h3 { font-size: 26px; font-weight: 700; letter-spacing: -.5px; margin-bottom: 10px; }
+    .ctt-left p { color: var(--muted); font-size: 15px; line-height: 1.7; margin-bottom: 28px; }
+    .ctt-links { display: flex; flex-direction: column; gap: 10px; }
+    .ctt-link { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color .2s; }
+    .ctt-link:hover { border-color: rgba(88,166,255,.4); }
+    .ctt-icon { width: 36px; height: 36px; border-radius: 6px; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--muted); }
+    .ctt-label { font-size: 13px; font-weight: 600; color: var(--text); }
+    .ctt-val   { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .ctt-arr   { color: var(--muted); margin-left: auto; }
+
+    .ctt-form { display: flex; flex-direction: column; gap: 14px; }
+    .fg { display: flex; flex-direction: column; gap: 6px; }
+    .fl { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .fi { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; color: var(--text); font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: border-color .2s; width: 100%; }
+    .fi:focus { border-color: var(--accent); }
+    .fi::placeholder { color: var(--muted); }
+    textarea.fi { min-height: 110px; resize: vertical; }
+    .f-submit { padding: 12px 24px; background: var(--accent); color: #0d1117; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity .2s; }
+    .f-submit:hover { opacity: .85; }
+
+    /* ─── Footer ────────────────────────────────────────── */
+    footer { border-top: 1px solid var(--border); padding: 28px 80px; display: flex; align-items: center; justify-content: space-between; max-width: 1160px; margin: 0 auto; }
+    .ft-brand { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--muted); }
+    .ft-brand span { color: var(--accent); }
+    .ft-right { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(139,148,158,.45); }
+
+    /* ─── Mobile ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 12px 24px; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; }
+      #hero::after { display: none; }
+      .hero-name { font-size: 44px; }
+      .sec-inner { padding: 0 24px; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .exp-card { grid-template-columns: 1fr; }
+      .exp-meta { text-align: left; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+      .dg { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-brand"><span>~/</span>abhishek.dev</div>
+  <div class="nav-links">
+    <a href="#journey">journey</a>
+    <a href="#skills">skills</a>
+    <a href="#experience">experience</a>
+    <a href="#projects">projects</a>
+    <a href="#education">education</a>
+    <a href="#contact">contact</a>
+  </div>
+  <div class="nav-status"><div class="dot-pulse"></div>available for work</div>
+</nav>
+
+<!-- ═══ HERO ═══════════════════════════════════════════════ -->
+<section id="hero">
+  <div style="position:relative;z-index:1">
+    <div class="sys-chip fade-1">SOFTWARE ENGINEER · NODE.JS · MONGODB · SQL</div>
+
+    <h1 class="hero-name fade-2">
+      Abhishek<br><span class="accent">Rajbhar.</span>
+    </h1>
+
+    <p class="hero-headline fade-3">
+      I build <strong>full-stack systems</strong>, integrate AI into production,
+      and architect services that don't break at 3am.
+    </p>
+
+    <div class="focus-tags fade-4">
+      <span class="ftag active">Currently: AI Integrations</span>
+      <span class="ftag active">Low Level Design</span>
+      <span class="ftag">Backend Architecture</span>
+      <span class="ftag">MERN Stack</span>
+      <span class="ftag">Open to Roles</span>
+    </div>
+
+    <div class="cta-row fade-5">
+      <a href="#projects" class="btn-p">⬡ View Projects</a>
+      <a href="#journey" class="btn-s">↓ Engineering Journey</a>
+      <a href="./Abhishek_Rajbhar_Resume.pdf" download="Abhishek_Rajbhar_Resume.pdf" class="btn-g">resume.pdf ↗</a>
+    </div>
+  </div>
+
+  <!-- Status Panel -->
+  <div class="fade-6" style="position:relative;z-index:1">
+    <div class="status-panel">
+      <div class="sp-header">
+        <div class="wdot" style="background:#ff5f57"></div>
+        <div class="wdot" style="background:#febc2e"></div>
+        <div class="wdot" style="background:#28c840"></div>
+        <span class="sp-title">engineer.status — live</span>
+      </div>
+      <div class="sp-body">
+        <div class="mrow"><span class="ml">system</span><span class="mv g">● ONLINE</span></div>
+        <div class="mrow"><span class="ml">current_build</span><span class="mv b">ai-dev-assistant</span></div>
+        <div class="mrow"><span class="ml">stack</span><span class="mv">MERN + Gemini</span></div>
+        <div class="mrow"><span class="ml">experience</span><span class="mv y">2 years</span></div>
+        <div class="mrow"><span class="ml">open_to_work</span><span class="mv g">true</span></div>
+
+        <div class="bar-w">
+          <div class="bar-l"><span>backend_proficiency</span><span>92%</span></div>
+          <div class="bar-t"><div class="bar-f" style="width:92%"></div></div>
+        </div>
+        <div class="bar-w" style="margin-top:10px">
+          <div class="bar-l"><span>ai_integration</span><span>80%</span></div>
+          <div class="bar-t"><div class="bar-f" style="width:80%;background:linear-gradient(90deg,#bc8cff,#d2a8ff)"></div></div>
+        </div>
+
+        <div class="act-feed">
+          <div class="act-item">
+            <div class="adot" style="background:var(--green)"></div>
+            <div><div class="atext"><strong>Shipped</strong> ai-dev-assistant v1.0</div><div class="atime">2h ago</div></div>
+          </div>
+          <div class="act-item">
+            <div class="adot" style="background:var(--accent)"></div>
+            <div><div class="atext"><strong>Integrated</strong> Gemini RAG pipeline</div><div class="atime">1d ago</div></div>
+          </div>
+          <div class="act-item">
+            <div class="adot" style="background:var(--yellow)"></div>
+            <div><div class="atext"><strong>Studying</strong> LLD patterns</div><div class="atime">ongoing</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sp-footer">uptime: <span id="uptime">00:00:00</span></div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>scroll</span><div class="scroll-arr"></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ JOURNEY ════════════════════════════════════════════ -->
+<div class="sec-outer" id="journey">
+<div class="sec-inner">
+  <div class="sec-label"><span>//</span> 01 — engineering journey</div>
+  <h2 class="sec-title">How I got here.</h2>
+  <p class="sec-sub">Not a highlight reel. A real timeline — milestones, failures, architecture lessons, and what each chapter taught me.</p>
+
+  <div class="timeline">
+
+    <!-- 2026 — AI Dev Assistant -->
+    <div class="tl-item open" onclick="tlToggle(this)">
+      <div class="tl-dot" style="background:var(--accent);border-color:var(--accent)"></div>
+      <div class="tl-hdr">
+        <span class="tl-yr">2026</span>
+        <div class="tl-tw">
+          <div class="tl-title">AI Dev Assistant — Exploring What AI Engineering Actually Means</div>
+          <div class="tl-sub">ai · backend · curiosity project</div>
+        </div>
+        <span class="tl-badge" style="color:var(--green);border-color:var(--green)">● shipped</span>
+        <span class="tl-arrow">›</span>
+      </div>
+      <div class="tl-body">
+        <div class="dg">
+          <div class="dc"><h4>Why I built it</h4><p>Wanted to go beyond just calling an AI API. Understood RAG, memory management, and context compression by actually building them — not just reading about them.</p></div>
+          <div class="dc"><h4>What I engineered</h4><p>Linked-list memory architecture, keyword-based RAG pipeline, in-memory cache with hash keys, custom request queue, and a structured debugging mode for error queries.</p></div>
+          <div class="dc"><h4>Architecture insight</h4><p>A sequential request queue beats rate-limiting middleware — it shifts from rejecting users to queuing them, making overload invisible at the application layer.</p></div>
+          <div class="dc"><h4>Lessons learned</h4><p>Keyword RAG delivers 80% of vector-search value at zero cost for focused domains. The best way to understand any technology is to build something real and break it yourself.</p></div>
+        </div>
+        <div class="t-chips"><span class="chip hl">Node.js</span><span class="chip hl">Express</span><span class="chip hl">MongoDB</span><span class="chip hl">Gemini API</span><span class="chip">RAG</span><span class="chip">Linked Lists</span><span class="chip">Request Queue</span><span class="chip">In-Memory Cache</span></div>
+      </div>
+    </div>
+
+    <!-- 2024 — StoreHippo -->
+    <div class="tl-item" onclick="tlToggle(this)">
+      <div class="tl-dot" style="background:var(--yellow);border-color:var(--yellow)"></div>
+      <div class="tl-hdr">
+        <span class="tl-yr">2024</span>
+        <div class="tl-tw">
+          <div class="tl-title">StoreHippo — First Time Engineering at Real Scale</div>
+          <div class="tl-sub">professional · marketplace · ondc · production</div>
+        </div>
+        <span class="tl-badge" style="color:var(--accent);border-color:var(--accent)">● professional</span>
+        <span class="tl-arrow">›</span>
+      </div>
+      <div class="tl-body">
+        <div class="dg">
+          <div class="dc"><h4>The environment</h4><p>Joined a large existing codebase serving real merchants and real transactions. No more greenfield projects — this was maintaining, extending, and not breaking things that already work.</p></div>
+          <div class="dc"><h4>What I shipped</h4><p>RESTful APIs, MongoDB aggregation optimizations, 10+ BI reports, React analytics dashboards, and ONDC integration for distributed commerce transactions.</p></div>
+          <div class="dc"><h4>Architecture insight</h4><p>The 35–45% reduction in report generation time came entirely from indexing strategy, not application code. At scale, the database layer is where performance is won or lost.</p></div>
+          <div class="dc"><h4>What actually changed</h4><p>Working on live systems with real users changes how you think permanently. The cost of a bug isn't a failing test — it's a merchant who can't process orders at 11pm.</p></div>
+        </div>
+
+        <div class="product-spotlight">
+          <div class="ps-header">
+            <span class="ps-name">Mystore</span>
+            <span class="ps-tag">Primary Product</span>
+            <span class="ps-tag">ONDC Connected</span>
+            <span class="ps-tag g">● Live</span>
+          </div>
+          <p class="ps-desc">India's ONDC-connected multi-vendor marketplace. I was embedded in Mystore for the full 1.5 years — the product where all the scale, the incidents, and the real engineering lessons happened.</p>
+          <div class="ps-stats">
+            <div class="ps-stat">tenure <span>1.5 years</span></div>
+            <div class="ps-stat">network <span>ONDC</span></div>
+            <div class="ps-stat">type <span>Multi-vendor Marketplace</span></div>
+          </div>
+        </div>
+
+        <div class="t-chips"><span class="chip hl">Node.js</span><span class="chip hl">MongoDB</span><span class="chip hl">React</span><span class="chip hl">Aggregation Pipelines</span><span class="chip">ONDC</span><span class="chip">REST API</span><span class="chip">Indexing</span></div>
+      </div>
+    </div>
+
+    <!-- 2024 — The 3AM Incident -->
+    <div class="tl-item" onclick="tlToggle(this)">
+      <div class="tl-dot" style="background:var(--red);border-color:var(--red)"></div>
+      <div class="tl-hdr">
+        <span class="tl-yr">2024</span>
+        <div class="tl-tw">
+          <div class="tl-title">The 3AM Incident — A Crash Course in Observability</div>
+          <div class="tl-sub">incident · production · hard lesson</div>
+        </div>
+        <span class="tl-badge" style="color:var(--red);border-color:var(--red)">● incident</span>
+        <span class="tl-arrow">›</span>
+      </div>
+      <div class="tl-body">
+        <div class="dg">
+          <div class="dc"><h4>What happened</h4><p>A production endpoint silently started failing. No alerts fired. No meaningful logs existed. PM2 was restarting the process on crash — masking the root cause entirely.</p></div>
+          <div class="dc"><h4>Root cause</h4><p>Unhandled promise rejections in an async Express route handler. Node.js swallowed the error, the process crashed, PM2 restarted it. The crash-restart loop caused data inconsistencies.</p></div>
+          <div class="dc"><h4>What I changed</h4><p>Global unhandled rejection handlers, structured JSON logging, health-check endpoints on every service. These now go in before any feature code — non-negotiable.</p></div>
+          <div class="dc"><h4>The real lesson</h4><p>You don't know your system is broken until you have observability. A system with no logs isn't a running system — it's a system that hasn't failed visibly yet.</p></div>
+        </div>
+        <div class="lesson"><span class="lesson-icon">→</span> Reliability is a first-class feature, not post-launch polish.</div>
+        <div class="lesson"><span class="lesson-icon">→</span> PM2 process restarts are not error handling — they're a silent cover-up.</div>
+        <div class="lesson"><span class="lesson-icon">→</span> Structured logs and health endpoints ship on day one, before features.</div>
+      </div>
+    </div>
+
+    <!-- 2024 — First Internship -->
+    <div class="tl-item" onclick="tlToggle(this)">
+      <div class="tl-dot" style="background:var(--yellow);border-color:var(--yellow)"></div>
+      <div class="tl-hdr">
+        <span class="tl-yr">2024</span>
+        <div class="tl-tw">
+          <div class="tl-title">First Internship — Where Real Learning Actually Begins</div>
+          <div class="tl-sub">professional · webdesys · first codebase</div>
+        </div>
+        <span class="tl-badge" style="color:var(--accent);border-color:var(--accent)">● professional</span>
+        <span class="tl-arrow">›</span>
+      </div>
+      <div class="tl-body">
+        <div class="dg">
+          <div class="dc"><h4>The context</h4><p>Last semester of college. First time working inside a codebase I didn't write. Other people's variable names, other people's decisions, other people's bugs to fix.</p></div>
+          <div class="dc"><h4>What I worked on</h4><p>Full-stack features in Node.js and React, a reusable UI component library, frontend performance optimizations, and resolving 30+ production bugs across live systems.</p></div>
+          <div class="dc"><h4>What hit different</h4><p>Tutorials teach you to build. A real codebase teaches you to read, maintain, and respect code. Most of your time is understanding — not writing.</p></div>
+          <div class="dc"><h4>Lessons learned</h4><p>Code is read far more than it's written. The best code isn't the cleverest — it's the one the next developer (or future you) understands without a comment.</p></div>
+        </div>
+        <div class="t-chips"><span class="chip hl">Node.js</span><span class="chip hl">React</span><span class="chip">Component Libraries</span><span class="chip">Bug Fixing</span><span class="chip">Performance</span></div>
+      </div>
+    </div>
+
+    <!-- 2023 — SchoolGuru + Chat App -->
+    <div class="tl-item" onclick="tlToggle(this)">
+      <div class="tl-dot" style="background:var(--accent);border-color:var(--accent)"></div>
+      <div class="tl-hdr">
+        <span class="tl-yr">2023</span>
+        <div class="tl-tw">
+          <div class="tl-title">SchoolGuru & Chat App — First Builds That Were Truly Mine</div>
+          <div class="tl-sub">shipped · confidence · curiosity-driven</div>
+        </div>
+        <span class="tl-badge" style="color:var(--green);border-color:var(--green)">● shipped</span>
+        <span class="tl-arrow">›</span>
+      </div>
+      <div class="tl-body">
+        <div class="dg">
+          <div class="dc"><h4>SchoolGuru</h4><p>Final year project — a peer marketplace for students to buy and sell school-work services. First time I built a full-stack app entirely alone. JWT auth, Stripe payments, full MERN. First time I felt like a real developer, not just a student following along.</p></div>
+          <div class="dc"><h4>Group Chat App</h4><p>Built immediately after SchoolGuru purely out of curiosity — wanted to understand WebSockets and real-time systems. Express + Socket.io + MySQL + AWS. No tutorial, just documentation and debugging until it worked.</p></div>
+          <div class="dc"><h4>What these taught me</h4><p>Confidence comes from shipping, not studying. Every bug you fix in your own project teaches you ten times more than a tutorial that works perfectly.</p></div>
+          <div class="dc"><h4>The pattern I noticed</h4><p>I learn best by building something I actually want to exist. Curiosity-driven projects produce deeper understanding than assignment-driven ones every single time.</p></div>
+        </div>
+        <div class="t-chips"><span class="chip hl">React</span><span class="chip hl">Node.js</span><span class="chip hl">MongoDB</span><span class="chip">Stripe</span><span class="chip">Socket.io</span><span class="chip">JWT</span><span class="chip">MySQL</span><span class="chip">AWS</span></div>
+      </div>
+    </div>
+
+    <!-- 2022 — Colt Steele -->
+    <div class="tl-item" onclick="tlToggle(this)">
+      <div class="tl-dot" style="background:var(--purple);border-color:var(--purple)"></div>
+      <div class="tl-hdr">
+        <span class="tl-yr">2022</span>
+        <div class="tl-tw">
+          <div class="tl-title">The Colt Steele Bootcamp — The Full Picture Finally Clicked</div>
+          <div class="tl-sub">learning · full-stack · turning point</div>
+        </div>
+        <span class="tl-badge" style="color:var(--purple);border-color:var(--purple)">● milestone</span>
+        <span class="tl-arrow">›</span>
+      </div>
+      <div class="tl-body">
+        <div class="dg">
+          <div class="dc"><h4>The course</h4><p>Colt Steele's Web Developer Bootcamp on Udemy. Third year of college. HTML, CSS, JS, Node.js, Express, MongoDB, REST APIs, authentication — end-to-end for the first time in one coherent arc.</p></div>
+          <div class="dc"><h4>What clicked</h4><p>For the first time, I understood how a request travels from a browser click all the way to a database and back. The whole stack — not just isolated pieces — made sense as a connected system.</p></div>
+          <div class="dc"><h4>Why it mattered</h4><p>College taught concepts in isolation. This course taught systems thinking — how HTML, JavaScript, servers, and databases are all one conversation. That mental model never left.</p></div>
+          <div class="dc"><h4>The shift</h4><p>Before: "I can write code." After: "I understand how web applications are built." That's a different kind of confidence — and it's what made the projects that followed possible.</p></div>
+        </div>
+        <div class="t-chips"><span class="chip hl">JavaScript</span><span class="chip hl">Node.js</span><span class="chip hl">Express</span><span class="chip hl">MongoDB</span><span class="chip">REST APIs</span><span class="chip">HTML/CSS</span><span class="chip">Authentication</span></div>
+      </div>
+    </div>
+
+    <!-- 2021 — JavaScript -->
+    <div class="tl-item" onclick="tlToggle(this)">
+      <div class="tl-dot" style="background:var(--purple);border-color:var(--purple)"></div>
+      <div class="tl-hdr">
+        <span class="tl-yr">2021</span>
+        <div class="tl-tw">
+          <div class="tl-title">JavaScript & the Browser — Code That Actually Did Something</div>
+          <div class="tl-sub">learning · frontend · discovery</div>
+        </div>
+        <span class="tl-badge" style="color:var(--purple);border-color:var(--purple)">● milestone</span>
+        <span class="tl-arrow">›</span>
+      </div>
+      <div class="tl-body">
+        <div class="dg">
+          <div class="dc"><h4>The discovery</h4><p>Second year of college. Picked up JavaScript after C. For the first time, code didn't just print to a terminal — it changed what was on screen. Buttons responded. Pages moved. It felt alive.</p></div>
+          <div class="dc"><h4>What this opened up</h4><p>Started building small UI projects — calculators, to-do lists, mini games. Nothing impressive, but each one reinforced that software is something people actually use, not just a grade on a paper.</p></div>
+        </div>
+        <div class="lesson"><span class="lesson-icon">→</span> The browser made programming feel real in a way a terminal never did.</div>
+        <div class="lesson"><span class="lesson-icon">→</span> Frontend was the hook. Backend would become the obsession.</div>
+      </div>
+    </div>
+
+    <!-- 2020 — Origin -->
+    <div class="tl-item" onclick="tlToggle(this)">
+      <div class="tl-dot" style="background:var(--green);border-color:var(--green)"></div>
+      <div class="tl-hdr">
+        <span class="tl-yr">2020</span>
+        <div class="tl-tw">
+          <div class="tl-title">printf("Hello, World\n"); — It Begins</div>
+          <div class="tl-sub">origin · c language · iimt college</div>
+        </div>
+        <span class="tl-badge" style="color:var(--muted);border-color:var(--border)">● origin</span>
+        <span class="tl-arrow">›</span>
+      </div>
+      <div class="tl-body">
+        <div class="dg">
+          <div class="dc"><h4>Where it started</h4><p>Joined IIMT College of Engineering for B.Tech in Computer Science. First language: C. Variables, loops, pointers, functions — the fundamentals that every language secretly borrows from.</p></div>
+          <div class="dc"><h4>The honest truth</h4><p>I had no idea what I was getting into. Programming felt like writing magic spells with strict grammar rules. The compiler was unforgiving. But when the program finally ran — that feeling was worth everything.</p></div>
+        </div>
+        <div class="lesson"><span class="lesson-icon">→</span> C teaches you what's actually happening. Every language you learn after is easier because of it.</div>
+        <div class="lesson"><span class="lesson-icon">→</span> The best engineers never stop being beginners who are genuinely curious.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══ SKILLS ══════════════════════════════════════════════ -->
+<div class="sec-outer" id="skills">
+<div class="sec-inner">
+  <div class="sec-label"><span>//</span> 02 — technical stack</div>
+  <h2 class="sec-title">What I work with.</h2>
+  <p class="sec-sub">Tools I use daily and areas where I have real production experience.</p>
+
+  <div class="skills-grid">
+    <div class="sk-card">
+      <div class="sk-hdr"><span class="sk-icon">⚙️</span><div><div class="sk-label">Backend</div><div class="sk-sub">primary focus</div></div></div>
+      <div class="sk-chips">
+        <span class="sc p">Node.js</span><span class="sc p">Express.js</span><span class="sc p">REST API Design</span>
+        <span class="sc p">Async Programming</span><span class="sc">JWT Auth</span><span class="sc">Socket.io</span><span class="sc">Nodemailer</span>
+      </div>
+    </div>
+    <div class="sk-card">
+      <div class="sk-hdr"><span class="sk-icon">🗄️</span><div><div class="sk-label">Databases</div><div class="sk-sub">data layer</div></div></div>
+      <div class="sk-chips">
+        <span class="sc p">MongoDB</span><span class="sc p">Aggregation Pipelines</span><span class="sc p">Indexing</span>
+        <span class="sc p">SQL</span><span class="sc">Mongoose</span><span class="sc">Sequelize</span>
+      </div>
+    </div>
+    <div class="sk-card">
+      <div class="sk-hdr"><span class="sk-icon">🤖</span><div><div class="sk-label">AI & Integrations</div><div class="sk-sub">growing focus</div></div></div>
+      <div class="sk-chips">
+        <span class="sc g">Gemini API</span><span class="sc g">RAG Systems</span><span class="sc g">Prompt Engineering</span>
+        <span class="sc g">LLM Pipelines</span><span class="sc">ONDC</span>
+      </div>
+    </div>
+    <div class="sk-card">
+      <div class="sk-hdr"><span class="sk-icon">⚛️</span><div><div class="sk-label">Frontend</div><div class="sk-sub">fullstack capable</div></div></div>
+      <div class="sk-chips">
+        <span class="sc p">React.js</span><span class="sc">Tailwind CSS</span><span class="sc">SCSS</span>
+        <span class="sc">JavaScript</span><span class="sc">Vite</span>
+      </div>
+    </div>
+    <div class="sk-card">
+      <div class="sk-hdr"><span class="sk-icon">🏗️</span><div><div class="sk-label">Architecture</div><div class="sk-sub">systems thinking</div></div></div>
+      <div class="sk-chips">
+        <span class="sc">System Design</span><span class="sc">LLD Patterns</span><span class="sc">DSA</span>
+        <span class="sc">Docker</span><span class="sc">AWS (EC2, S3)</span><span class="sc">CI/CD</span>
+      </div>
+    </div>
+    <div class="sk-card">
+      <div class="sk-hdr"><span class="sk-icon">🛠️</span><div><div class="sk-label">Tools & Testing</div><div class="sk-sub">dev workflow</div></div></div>
+      <div class="sk-chips">
+        <span class="sc">Git / GitHub</span><span class="sc">Mocha</span><span class="sc">Chai</span>
+        <span class="sc">Postman</span><span class="sc">CLI Tools</span><span class="sc">Debugging</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══ EXPERIENCE ══════════════════════════════════════════ -->
+<div class="sec-outer" id="experience">
+<div class="sec-inner">
+  <div class="sec-label"><span>//</span> 03 — work experience</div>
+  <h2 class="sec-title">Where I've worked.</h2>
+  <p class="sec-sub">Professional engineering experience on live, production-scale systems.</p>
+
+  <div class="exp-list">
+
+    <div class="exp-card">
+      <div>
+        <div class="exp-role">Junior Software Developer</div>
+        <div class="exp-co">StoreHippo Pvt. Ltd.</div>
+
+        <div class="product-spotlight">
+          <div class="ps-header">
+            <span class="ps-name">Mystore</span>
+            <span class="ps-tag">Primary Product</span>
+            <span class="ps-tag">ONDC Connected</span>
+            <span class="ps-tag g">● Live</span>
+          </div>
+          <p class="ps-desc">India's ONDC-connected multi-vendor marketplace platform. Mystore enables merchants to list, sell, and manage orders across the Open Network for Digital Commerce. I was embedded in this product for the full 1.5 years — owning backend features, performance optimization, and production stability across a high-load commerce system.</p>
+          <div class="ps-stats">
+            <div class="ps-stat">tenure <span>1.5 years</span></div>
+            <div class="ps-stat">stack <span>Node.js · React · MongoDB</span></div>
+            <div class="ps-stat">network <span>ONDC</span></div>
+          </div>
+        </div>
+
+        <ul class="exp-bullets">
+          <li>Developed and maintained scalable full-stack features and RESTful APIs for a multi-vendor marketplace platform using Node.js, React.js, and MongoDB.</li>
+          <li>Optimized MongoDB aggregation pipelines and indexing strategies, reducing report generation time by <strong style="color:var(--text)">35–45%</strong> and backend latency by <strong style="color:var(--text)">30%+</strong> under high-load production conditions.</li>
+          <li>Designed and shipped <strong style="color:var(--text)">10+ business intelligence reports</strong> and React analytics dashboards for near real-time merchant insights, improving UI load times by up to 30%.</li>
+          <li>Worked on ONDC integration — API communication, async callbacks, data synchronization, and transaction reliability across distributed services.</li>
+          <li>Diagnosed and resolved production incidents using structured debugging (logs, CLI tools, root-cause analysis), reducing average resolution time by <strong style="color:var(--text)">40%</strong>.</li>
+        </ul>
+      </div>
+      <div class="exp-meta">
+        <div class="exp-date">Nov 2024 – May 2026</div>
+        <div class="exp-badge">full-time</div>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div>
+        <div class="exp-role">Full Stack Developer Intern</div>
+        <div class="exp-co">WebDesys Techno Consultant Pvt. Ltd.</div>
+        <ul class="exp-bullets">
+          <li>Developed full-stack web applications using Node.js and React.js, improving overall system performance by <strong style="color:var(--text)">20%</strong>.</li>
+          <li>Built a reusable UI component library and optimized frontend rendering, reducing page load time by <strong style="color:var(--text)">25%</strong>.</li>
+          <li>Identified and resolved <strong style="color:var(--text)">30+ bugs</strong>, improving application stability and user experience across production.</li>
+        </ul>
+      </div>
+      <div class="exp-meta">
+        <div class="exp-date">Dec 2023 – May 2024</div>
+        <div class="exp-badge">internship</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══ PROJECTS ════════════════════════════════════════════ -->
+<div class="sec-outer" id="projects">
+<div class="sec-inner">
+  <div class="sec-label"><span>//</span> 04 — selected projects</div>
+  <h2 class="sec-title">Things I've built.</h2>
+  <p class="sec-sub">Personal projects that pushed me to solve real engineering problems.</p>
+
+  <div class="proj-grid">
+
+    <!-- AI Dev Assistant (featured) -->
+    <div class="pcard feat">
+      <div class="p-top">
+        <div class="p-icon">🤖</div>
+        <div class="p-links">
+          <span class="p-link" style="opacity:.45;cursor:default">GitHub (soon)</span>
+          <span class="p-link" style="opacity:.45;cursor:default">Live (soon)</span>
+        </div>
+      </div>
+      <div>
+        <div class="p-name">AI Dev Knowledge Assistant</div>
+        <div class="p-date">May 2026</div>
+      </div>
+      <p class="p-desc">MERN AI assistant powered by Gemini API. RAG pipeline with keyword-based document scoring, linked-list memory architecture with AI-driven summarization, in-memory cache, and custom request queue to prevent API overload.</p>
+      <div class="p-tech">
+        <span class="pt">Node.js</span><span class="pt">Express</span><span class="pt">MongoDB</span>
+        <span class="pt">React</span><span class="pt">Gemini API</span><span class="pt">RAG</span>
+      </div>
+      <div class="p-foot">
+        <span class="p-stat">Stack: <span>MERN + AI</span></span>
+        <span class="feat-badge">● featured</span>
+      </div>
+    </div>
+
+    <!-- FST Mailer -->
+    <div class="pcard">
+      <div class="p-top">
+        <div class="p-icon">📧</div>
+        <div class="p-links">
+          <a href="https://github.com/abhishekdev45/fst-mailer" target="_blank" rel="noopener" class="p-link">GitHub ↗</a>
+          <a href="https://fst-mailer.vercel.app/" target="_blank" rel="noopener" class="p-link">Live ↗</a>
+        </div>
+      </div>
+      <div>
+        <div class="p-name">FST Mailer</div>
+        <div class="p-date">Jan 2024 — present</div>
+      </div>
+      <p class="p-desc">SaaS platform for email marketers. Batch emailing via Nodemailer, centralized HTML template repository with save/edit/reuse, CSV contact import, and team management.</p>
+      <div class="p-tech">
+        <span class="pt">Node.js</span><span class="pt">Express</span><span class="pt">MongoDB</span>
+        <span class="pt">React</span><span class="pt">Nodemailer</span><span class="pt">Tailwind</span>
+      </div>
+      <div class="p-foot"><span class="p-stat">Type: <span>SaaS</span></span></div>
+    </div>
+
+    <!-- Grow-Collab -->
+    <div class="pcard">
+      <div class="p-top">
+        <div class="p-icon">🌱</div>
+        <div class="p-links">
+          <a href="https://github.com/abhishekdev45/GrowCollab" target="_blank" rel="noopener" class="p-link">GitHub ↗</a>
+          <a href="https://grow-collab.vercel.app/" target="_blank" rel="noopener" class="p-link">Live ↗</a>
+        </div>
+      </div>
+      <div>
+        <div class="p-name">Grow-Collab</div>
+        <div class="p-date">April 2025</div>
+      </div>
+      <p class="p-desc">Business and service community marketplace for Neemkathana. Connects local businesses and customers for seamless discovery and growth. Full MERN stack.</p>
+      <div class="p-tech">
+        <span class="pt">React</span><span class="pt">Node.js</span><span class="pt">MongoDB</span><span class="pt">Express</span>
+      </div>
+      <div class="p-foot"><span class="p-stat">Type: <span>Marketplace</span></span></div>
+    </div>
+
+    <!-- School Guru -->
+    <div class="pcard">
+      <div class="p-top">
+        <div class="p-icon">🎓</div>
+        <div class="p-links">
+          <a href="https://github.com/abhishekdev45/School-Guru" target="_blank" rel="noopener" class="p-link">GitHub ↗</a>
+          <a href="https://school-gurufrontend-c7vefl6s8-abhishekdev45s-projects.vercel.app/" target="_blank" rel="noopener" class="p-link">Live ↗</a>
+        </div>
+      </div>
+      <div>
+        <div class="p-name">SchoolGuru</div>
+        <div class="p-date">Nov 2023 — present</div>
+      </div>
+      <p class="p-desc">Peer marketplace for students to buy and sell school-work services. Dynamic React UI, JWT authentication, and Stripe payment integration.</p>
+      <div class="p-tech">
+        <span class="pt">React</span><span class="pt">Node.js</span><span class="pt">MongoDB</span>
+        <span class="pt">JWT</span><span class="pt">Stripe</span><span class="pt">SCSS</span>
+      </div>
+      <div class="p-foot"><span class="p-stat">Type: <span>Marketplace</span></span></div>
+    </div>
+
+    <!-- Group Chat App -->
+    <div class="pcard">
+      <div class="p-top">
+        <div class="p-icon">💬</div>
+        <div class="p-links">
+          <a href="https://github.com/abhishekdev45/Group-chat-app1" target="_blank" rel="noopener" class="p-link">GitHub ↗</a>
+          <a href="https://group-chat-app1.onrender.com/" target="_blank" rel="noopener" class="p-link">Live ↗</a>
+        </div>
+      </div>
+      <div>
+        <div class="p-name">Group Chat App</div>
+        <div class="p-date">Oct 2023</div>
+      </div>
+      <p class="p-desc">Real-time group messaging with Express.js and Socket.io. JWT-secured auth, Sequelize ORM with MySQL, MVC architecture, and deployed on AWS.</p>
+      <div class="p-tech">
+        <span class="pt">Express.js</span><span class="pt">Socket.io</span><span class="pt">MySQL</span>
+        <span class="pt">Sequelize</span><span class="pt">JWT</span><span class="pt">AWS</span>
+      </div>
+      <div class="p-foot"><span class="p-stat">Type: <span>Real-time</span></span></div>
+    </div>
+
+    <!-- Movie Hub -->
+    <div class="pcard">
+      <div class="p-top">
+        <div class="p-icon">🎬</div>
+        <div class="p-links">
+          <a href="https://github.com/abhishekdev45/movieApplication" target="_blank" rel="noopener" class="p-link">GitHub ↗</a>
+          <a href="https://moviehubabhishek.netlify.app/" target="_blank" rel="noopener" class="p-link">Live ↗</a>
+        </div>
+      </div>
+      <div>
+        <div class="p-name">Movie Hub</div>
+        <div class="p-date">Jun 2023</div>
+      </div>
+      <p class="p-desc">Movie and TV discovery app built with React. Integrates TMDB API for live data, features dark mode, category browsing, and search.</p>
+      <div class="p-tech">
+        <span class="pt">React</span><span class="pt">JavaScript</span><span class="pt">Axios</span><span class="pt">Tailwind CSS</span><span class="pt">TMDB API</span>
+      </div>
+      <div class="p-foot"><span class="p-stat">Type: <span>API Integration</span></span></div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══ EDUCATION ════════════════════════════════════════════ -->
+<div class="sec-outer" id="education">
+<div class="sec-inner">
+  <div class="sec-label"><span>//</span> 05 — education</div>
+  <h2 class="sec-title">Academic background.</h2>
+  <p class="sec-sub">The foundation everything else was built on.</p>
+
+  <div class="exp-list">
+
+    <div class="exp-card">
+      <div>
+        <div class="exp-role">B.Tech — Computer Science &amp; Engineering</div>
+        <div class="exp-co">IIMT College of Engineering, Greater Noida</div>
+        <ul class="exp-bullets">
+          <li>Graduated with <strong style="color:var(--text)">8.6 CGPA</strong> — consistently in the top academic tier.</li>
+          <li>Core coursework: Data Structures &amp; Algorithms, DBMS, Operating Systems, Computer Networks, OOP, System Design.</li>
+          <li>Where the curiosity for building started — and where the late-night debugging sessions became a habit.</li>
+        </ul>
+      </div>
+      <div class="exp-meta">
+        <div class="exp-date">Nov 2020 – Jun 2024</div>
+        <div class="exp-badge">B.Tech · CSE</div>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div>
+        <div class="exp-role">Class XII — PCM (Physics, Chemistry, Maths)</div>
+        <div class="exp-co">St. Mary's Day Inter College, Lucknow</div>
+        <ul class="exp-bullets">
+          <li>Scored <strong style="color:var(--text)">95.6%</strong> in CBSE board examinations.</li>
+          <li>Strong mathematics foundation that later made algorithms and system design intuitive.</li>
+        </ul>
+      </div>
+      <div class="exp-meta">
+        <div class="exp-date">2019 – 2020</div>
+        <div class="exp-badge">CBSE · XII</div>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div>
+        <div class="exp-role">Class X</div>
+        <div class="exp-co">St. Mary's Day Inter College, Lucknow</div>
+        <ul class="exp-bullets">
+          <li>Scored <strong style="color:var(--text)">96.2%</strong> in CBSE board examinations.</li>
+        </ul>
+      </div>
+      <div class="exp-meta">
+        <div class="exp-date">2017 – 2018</div>
+        <div class="exp-badge">CBSE · X</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══ CONTACT ══════════════════════════════════════════════ -->
+<div class="sec-outer" id="contact">
+<div class="sec-inner">
+  <div class="sec-label"><span>//</span> 06 — get in touch</div>
+  <h2 class="sec-title">Let's build something.</h2>
+  <p class="sec-sub">Open to software engineering roles, freelance projects, and interesting engineering conversations.</p>
+
+  <div class="contact-grid">
+    <div class="ctt-left">
+      <h3>Reach out directly.</h3>
+      <p>Whether it's a role, a project, or a technical discussion — my inbox is open.</p>
+      <div class="ctt-links">
+        <a href="mailto:abhishek14kl@gmail.com" class="ctt-link">
+          <div class="ctt-icon">✉</div>
+          <div><div class="ctt-label">Email</div><div class="ctt-val">abhishek14kl@gmail.com</div></div>
+          <span class="ctt-arr">↗</span>
+        </a>
+        <a href="https://github.com/abhishekdev45" target="_blank" rel="noopener" class="ctt-link">
+          <div class="ctt-icon">GH</div>
+          <div><div class="ctt-label">GitHub</div><div class="ctt-val">github.com/abhishekdev45</div></div>
+          <span class="ctt-arr">↗</span>
+        </a>
+        <a href="https://www.linkedin.com/in/abhishekdev45/" target="_blank" rel="noopener" class="ctt-link">
+          <div class="ctt-icon">in</div>
+          <div><div class="ctt-label">LinkedIn</div><div class="ctt-val">linkedin.com/in/abhishekdev45</div></div>
+          <span class="ctt-arr">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <form class="ctt-form" action="https://formspree.io/f/xykvjyyr" method="POST">
+      <div class="fg"><label class="fl">Name</label><input class="fi" type="text" name="name" placeholder="Your name" required></div>
+      <div class="fg"><label class="fl">Email</label><input class="fi" type="email" name="email" placeholder="your@email.com" required></div>
+      <div class="fg"><label class="fl">Message</label><textarea class="fi" name="message" placeholder="What are you building?" required></textarea></div>
+      <button type="submit" class="f-submit">Send Message →</button>
+    </form>
+  </div>
+</div>
+</div>
+
+<!-- ═══ FOOTER ══════════════════════════════════════════════ -->
+<hr class="divider">
+<footer>
+  <div class="ft-brand"><span>~/</span>abhishek.dev — built with intention</div>
+  <div class="ft-right">designed & developed by Abhishek Rajbhar · 2026</div>
+</footer>
+
+<script>
+  // Live uptime counter
+  const start = Date.now();
+  function tick() {
+    const s = Math.floor((Date.now() - start) / 1000);
+    const h = String(Math.floor(s / 3600)).padStart(2, '0');
+    const m = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
+    const sec = String(s % 60).padStart(2, '0');
+    document.getElementById('uptime').textContent = h + ':' + m + ':' + sec;
+  }
+  setInterval(tick, 1000);
+  tick();
+
+  // Timeline accordion
+  function tlToggle(el) {
+    const wasOpen = el.classList.contains('open');
+    document.querySelectorAll('.tl-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) el.classList.add('open');
+  }
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => {
+          a.style.color = a.getAttribute('href') === '#' + e.target.id ? 'var(--text)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
